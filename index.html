@@ -12,9 +12,9 @@
     <div class="contact-us">
         <form>
             <h1>Future</h1>
-            <input type="text" placeholder="From" required id="from">
-            <input type="text" placeholder="For" required id="to">
-            <input type="text" placeholder="Message" name="message" id="message">
+            <input type="text" placeholder="From" id="from" required>
+            <input type="text" placeholder="For" id="to" required>
+            <input type="text" placeholder="Message" name="message" id="message" required>
             <button type="button" onclick="sendMessage()">KIRIM</button>
         </form>
     </div>
@@ -27,6 +27,11 @@
             const from = document.getElementById('from').value;
             const to = document.getElementById('to').value;
             const message = document.getElementById('message').value;
+
+            if (from.trim() === '' || to.trim() === '' || message.trim() === '') {
+                swal("Error!", "All fields are required.", "error");
+                return;
+            }
 
             const fullMessage = `From: ${from}\nFor: ${to}\nMessage: ${message}`;
 
@@ -57,3 +62,4 @@
     </script>
 </body>
 </html>
+
