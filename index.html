@@ -28,7 +28,7 @@
             const to = document.getElementById('to').value;
             const message = document.getElementById('message').value;
 
-            const fullMessage = `From: ${from}\nFor: ${to}\n\nMessage: ${message}`;
+            const fullMessage = `From: ${from}\nFor: ${to}\nMessage: ${message}`;
 
             fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
                 method: 'POST',
