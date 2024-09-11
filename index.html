@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Message</title>
+    <link rel="stylesheet" href="index.css">
+    <script src="https://smtpjs.com/v3/smtp.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+</head>
+<body>
+    <div class="contact-us">
+        <form>
+            <h1>Future</h1>
+            <input type="text" placeholder="From" required id="from">
+            <input type="text" placeholder="For" required id="to">
+            <input type="text" placeholder="Message" name="message" id="message">
+            <button type="button" onclick="sendMessage()">KIRIM</button>
+        </form>
+    </div>
+
+    <script>
+        const botToken = '6293769087:AAFPr1lObI0P5JlMYY7sm35R2q0SI2PKcLk'; // Replace with your bot token
+        const chatId = '-1002417352914'; // Replace with your group chat ID
+
+        function sendMessage() {
+            const from = document.getElementById('from').value;
+            const to = document.getElementById('to').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            const fullMessage = `From: ${from}\nFor: ${to}\n\nMessage: ${message}`;
+
+            fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: fullMessage,
+                }),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data.ok) {
+                    swal("Success!", "Message sent successfully!", "success");
+                } else {
+                    swal("Error!", "Failed to send message.", "error");
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                swal("Error!", "Failed to send message.", "error");
+            });
+        }
+    </script>
+</body>
+</html>
